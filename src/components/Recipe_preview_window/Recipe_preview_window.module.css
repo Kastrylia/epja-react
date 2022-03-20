@@ -4,16 +4,56 @@
     border-radius: 10px;
     margin: 20px;
     position: relative;
+    background-size: 100% 100%;
+    
 }
 
 .info_wrapper{
+    box-sizing: border-box;
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
     bottom: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     height: 62px;
     border-radius: 10px;
-    text-align: center;
-    line-height: 62px;
     color: white;
+    transition:all 0.5s ease;  
+    font-size: 21px; 
 }
+
+.recipe_name{
+    width: 95%;
+    text-align: center;
+    height: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    
+}
+
+.item_wrapper:hover .recipe_name{
+    overflow: visible;
+    height: auto;
+    white-space: normal;
+}
+
+.item_wrapper:hover .info_wrapper{
+    height: 75%;
+    transition:all 0.5s ease;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ingredients_count, .time_calories_count{
+    display: none;
+}
+
+.item_wrapper:hover .ingredients_count, .item_wrapper:hover .time_calories_count {
+    display: block;
+}
+
+

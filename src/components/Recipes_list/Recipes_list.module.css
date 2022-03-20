@@ -1,4 +1,6 @@
 .recipe_grid{
     display: flex;
     flex-wrap: wrap;
+    width: 70%;
+    margin: 0 auto;
 }
