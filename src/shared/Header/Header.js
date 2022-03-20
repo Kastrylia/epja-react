@@ -1,5 +1,7 @@
 import React from 'react';
+
 import styles from './Header.module.css'
+
 import cake_logo from '../../icons/cake-logo-transparent.png'
 import stub_profile_picture from '../../icons/stub_profile_picture.png'
 
@@ -18,8 +20,6 @@ function Header(){
                 </ul>
             </div> 
         </nav>
-
-        
 
         <div className={styles.profile_panel}>
             <img src={stub_profile_picture} alt="profile picture" height={50} width={50}/>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styles from './Filtration_window.module.css'
-import close_btn_img from '../../icons/close_icon.png'
+import close_btn_img from '../../../icons/close_icon.png'
 
 function Filtration_window(){
     return(

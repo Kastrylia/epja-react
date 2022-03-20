@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+  }
+  
+:root{
+    --main_theme_color:#FFBB33;
+}
+
+.app_wrapper{
+    width: 100%;
+    height: 100%;
+    
+}

@@ -1,7 +1,10 @@
-import styles from './App.module.css';
 import React from 'react';
-import Header from '../Header'
-import Recipes from '../../pages/Recipes'
+
+import styles from './App.module.css';
+
+import Header from './shared/Header'
+import Recipes from './pages/Recipes'
+
 
 function App() {
     return(
@@ -10,7 +13,6 @@ function App() {
         <Recipes />
     </div>)
 }
-
 
 
 export default App;

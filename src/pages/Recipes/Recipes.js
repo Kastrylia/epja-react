@@ -2,8 +2,8 @@ import React,{useState,useEffect} from 'react'
 
 import styles from './Recipes.module.css'
 
-import Recipes_list from '../../components/Recipes_list'
-import Filtration_window from '../../components/Filtration_window'
+import Recipes_list from './Recipes_list'
+import Filtration_window from './Filtration_window'
 
 import search_icon from '../../icons/search-icon.png'
 import filtration_icon from '../../icons/filtration_icon.jpg'
