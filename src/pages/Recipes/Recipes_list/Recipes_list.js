@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styles from './Recipes_list.module.css'
-import Recipe_preview_window from '../Recipe_preview_window'
+import Recipe_preview_window from '../Recipe_preview_window/'
 
 function Recepies_list(props){
 

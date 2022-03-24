@@ -23,6 +23,7 @@
     color: white;
     transition:all 0.5s ease;  
     font-size: 21px; 
+    user-select: none;
 }
 
 .recipe_name{
@@ -55,5 +56,7 @@
 .item_wrapper:hover .ingredients_count, .item_wrapper:hover .time_calories_count {
     display: block;
 }
+
+
 
 

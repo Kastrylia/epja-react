@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
 
 import styles from './Recipes.module.css'
 
@@ -11,55 +11,76 @@ import filtration_icon from '../../icons/filtration_icon.jpg'
 function Recipes(props){
     const API = 'https://api.edamam.com/api/recipes/v2?type=public&app_id=65dec05c&app_key=23d0b898ba9de2d82036352d7d926b83'
 
-    let [searchQuery, setSearchQuery] = useState(null)
     let [recipesList, setRecipesList] = useState([])
 
-    function handleSearch(){
-        let query = document.getElementById(styles.search_bar).value
-        if (query === null){
-            return null
-        }
-        setSearchQuery(query)
-    }
+    let search_bar = useRef()
 
     function handleEnterPush(event){
         if (event.key === 'Enter' ){
-            handleSearch()
+            makeSearchRequest()
         }
     }
 
-    function handleFiltrationWindow(){
 
+    let [filtrationVisible,setFiltrationVisible] = useState(false)
+
+    function handleFiltrationClick(){
+        setFiltrationVisible(!filtrationVisible)
     }
 
-    useEffect(()=>{
 
-        if (searchQuery === null){
+    function makeSearchRequest(){
+
+        if (search_bar.current.value === undefined){
             return null
         }
 
         async function getRecepiesList(){
-            let request = API + '&q=' + searchQuery
+            let dietConf = [...filtrationFlags.current.diet_pref].map((flag)=>`&diet=${flag}`).join('')
+            let healthConf = [...filtrationFlags.current.health_pref].map((flag) =>`&health=${flag}` ).join('')
+            let mealConf = [...filtrationFlags.current.meal_pref].map((flag) =>`&mealType=${flag}`).join('')
 
+            let request = API + '&q=' + search_bar.current.value + dietConf + mealConf + healthConf
             let response = await fetch(request)
             response = await response.json()
             let recipes = response.hits
+            console.log(response)
             setRecipesList(recipes)
-            console.log(recipes)
+
         }
 
         getRecepiesList()
-    }, [searchQuery])
+    }
 
 
-    let [filtrationFlags,setFiltrationFlags] = useState({
-        diet_pref:[],
-        meal_pref:[],
-        health_pref:[]
+    let filtrationFlags = useRef({
+        diet_pref: new Set(),
+        meal_pref:new Set(),
+        health_pref:new Set()
     })
 
-    function handleFiltrationChange(event){
-        
+    function handleDietPreferencesChange(event){
+        let pushedSwitchName = event.target.name
+
+        if (pushedSwitchName === 'balanced' || pushedSwitchName === 'high-protein' || pushedSwitchName === 'low-fat'){
+            if (event.target.checked){
+                filtrationFlags.current.diet_pref.add(pushedSwitchName)
+            } else{
+                filtrationFlags.current.diet_pref.delete(pushedSwitchName)
+            }
+        } else if (pushedSwitchName === 'gluten-free' || pushedSwitchName === 'vegetarian' || pushedSwitchName === 'low-sugar' ||pushedSwitchName === 'dairy-free'){
+            if (event.target.checked){
+                filtrationFlags.current.health_pref.add(pushedSwitchName)
+            } else{
+                filtrationFlags.current.health_pref.delete(pushedSwitchName)
+            }
+        } else{
+            if (event.target.checked){
+                filtrationFlags.current.meal_pref.add(pushedSwitchName)
+            } else{
+                filtrationFlags.current.meal_pref.delete(pushedSwitchName)
+            }
+        }
     }
 
     
@@ -71,20 +92,22 @@ function Recipes(props){
             </div>
 
             <div className={styles.search_panel}>
-                <button className={styles.filtration_btn}>
+                <button className={styles.filtration_btn} onClick={handleFiltrationClick}>
                     <span>Filtration</span>
                     <img src={filtration_icon} alt="" />
                 </button>
 
-                <input type="text" placeholder="Search..." id={styles.search_bar} onKeyDown = {handleEnterPush}/>
+                <input type="text" placeholder="Search..." id={styles.search_bar} onKeyDown = {handleEnterPush} ref={search_bar}/>
 
-                <button type="submit" id={styles.search_btn} onClick={handleSearch} >
+                <button type="submit" id={styles.search_btn} onClick={makeSearchRequest} >
                     <img src={search_icon} alt="" width="30px" height="30px" />
                 </button>
+                <Filtration_window isVisible = {filtrationVisible} closeWindow={handleFiltrationClick} toggleHandler={handleDietPreferencesChange}/>
+                
             </div>
    
             {(recipesList.length === 0)? false:<Recipes_list recipesList={recipesList} />}
-            <Filtration_window />
+            
         </section>
     )
 }

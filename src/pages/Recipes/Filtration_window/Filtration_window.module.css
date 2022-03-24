@@ -1,5 +1,32 @@
 .filtration_window{
-    width: 580px;
-    height: 480px;
-    background-color:white 50%;
+    width: 55%;
+    transition: all 0.5s;
+    background-color:rgba(255, 255, 255, 0.9);
+    position: absolute;
+    border: 1px solid #9A9A9A;
+    border-radius: 15px;
+    left: 0;
+    top:50px;
+    z-index: 2;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    padding: 15px 15px 30px 15px;
+}
+
+.checkbox_wrapper{
+    display: inline-flex;
+    justify-content: space-between;
+    margin-top: 12px;
+   
+}
+
+.close_btn{
+    position: absolute;
+    right: 5px;
+    top: 0;
+}
+
+.pref_selector{
+    margin: 20px 0;
 }

@@ -1,0 +1,36 @@
+
+
+.checkbox{
+    appearance: none;
+    position: absolute;
+    
+}
+
+.filtration_switch{
+    height: 28px;
+    background-color: white;
+    display: inline-block;
+    border-radius: 15px;
+    padding: 5px 10px;
+    user-select: none;
+    transition: all 0.05s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    transition: all 0.3s;
+    
+   
+}
+
+.checkbox:checked + .filtration_switch{
+    transition: all 0.3s;
+    background-color:var(--main_theme_color);
+}
+
+
+.checkbox_body:not(:first-child){
+    margin-left:10px ;
+} 
